@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>For My Love ❤️</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Georgia", serif;
+}
+
+body {
+    min-height: 100vh;
+    overflow: hidden;
+
+    background:
+        radial-gradient(circle at 20% 20%, #ffb6c9 0%, transparent 30%),
+        radial-gradient(circle at 80% 80%, #ff9fbd 0%, transparent 30%),
+        linear-gradient(135deg, #ff416c, #ff4b7d, #ff758c);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: white;
+}
+
+
+/* =========================
+   FLOATING HEARTS
+========================= */
+
+.heart {
+    position: fixed;
+    bottom: -60px;
+
+    font-size: 25px;
+
+    opacity: 0.7;
+
+    animation: floatUp linear infinite;
+
+    pointer-events: none;
+
+    z-index: 0;
+}
+
+@keyframes floatUp {
+
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+
+    15% {
+        opacity: 0.8;
+    }
+
+    100% {
+        transform:
+            translateY(-120vh)
+            rotate(360deg);
+
+        opacity: 0;
+    }
+}
+
+
+/* =========================
+   ROMANTIC CARD
+========================= */
+
+.card {
+
+    width: min(92%, 520px);
+
+    padding: 45px 30px;
+
+    text-align: center;
+
+    border-radius: 35px;
+
+    background:
+        rgba(255,255,255,0.16);
+
+    backdrop-filter: blur(20px);
+
+    border:
+        1px solid rgba(255,255,255,0.35);
+
+    box-shadow:
+        0 25px 70px rgba(80,0,30,0.35);
+
+    position: relative;
+
+    z-index: 5;
+
+    animation: appear 0.8s ease;
+}
+
+@keyframes appear {
+
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+
+/* =========================
+   HEART
+========================= */
+
+.bigHeart {
+
+    font-size: 80px;
+
+    margin-bottom: 15px;
+
+    animation:
+        heartbeat 1.3s infinite;
+}
+
+@keyframes heartbeat {
+
+    0%,100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.18);
+    }
+}
+
+
+/* =========================
+   TEXT
+========================= */
+
+h1 {
+
+    font-size: 32px;
+
+    margin-bottom: 15px;
+
+    text-shadow:
+        0 3px 15px rgba(100,0,30,0.3);
+}
+
+p {
+
+    font-size: 18px;
+
+    line-height: 1.6;
+
+    margin-bottom: 28px;
+}
+
+
+/* =========================
+   OPTIONS
+========================= */
+
+.options {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 13px;
+}
+
+button {
+
+    width: 100%;
+
+    border: none;
+
+    padding: 16px;
+
+    border-radius: 18px;
+
+    background: white;
+
+    color: #e83f6f;
+
+    font-size: 17px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 8px 20px rgba(80,0,30,0.15);
+
+    transition:
+        transform 0.2s,
+        box-shadow 0.2s;
+}
+
+button:hover {
+
+    transform: scale(1.04);
+
+    box-shadow:
+        0 12px 25px rgba(80,0,30,0.25);
+}
+
+
+/* =========================
+   HIDDEN
+========================= */
+
+.hidden {
+    display: none;
+}
+
+
+/* =========================
+   WRONG ANSWER
+========================= */
+
+.message {
+
+    margin-top: 20px;
+
+    min-height: 28px;
+
+    font-size: 19px;
+
+    font-weight: bold;
+}
+
+
+/* =========================
+   RUNAWAY BUTTON
+========================= */
+
+#noLove,
+#noGrow {
+
+    position: relative;
+
+    transition: none;
+}
+
+
+/* =========================
+   FINAL PAGE
+========================= */
+
+.finalText {
+
+    font-size: 19px;
+
+    line-height: 1.8;
+
+    margin: 20px 0 25px;
+}
+
+.signature {
+
+    font-size: 18px;
+
+    font-style: italic;
+
+    margin-top: 20px;
+}
+
+
+/* =========================
+   PHOTO TRANSITION
+========================= */
+
+.photoPage {
+
+    position: fixed;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff416c,
+            #ff758c
+        );
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-direction: column;
+
+    z-index: 100;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition:
+        opacity 1.5s ease;
+}
+
+.photoPage.show {
+
+    opacity: 1;
+
+    pointer-events: all;
+}
+
+.photoPage img {
+
+    max-width: 85%;
+
+    max-height: 70vh;
+
+    object-fit: cover;
+
+    border-radius: 25px;
+
+    box-shadow:
+        0 20px 60px rgba(60,0,20,0.45);
+
+    transform: scale(0.8);
+
+    transition:
+        transform 1.5s ease;
+}
+
+.photoPage.show img {
+
+    transform: scale(1);
+}
+
+.photoCaption {
+
+    margin-top: 25px;
+
+    font-size: 25px;
+
+    text-align: center;
+
+    font-weight: bold;
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- FLOATING HEARTS -->
+
+<div class="heart" style="left:5%;animation-duration:8s;">❤️</div>
+<div class="heart" style="left:15%;animation-duration:10s;">💕</div>
+<div class="heart" style="left:28%;animation-duration:7s;">💗</div>
+<div class="heart" style="left:40%;animation-duration:11s;">❤️</div>
+<div class="heart" style="left:55%;animation-duration:8s;">💖</div>
+<div class="heart" style="left:68%;animation-duration:10s;">💕</div>
+<div class="heart" style="left:80%;animation-duration:7s;">💗</div>
+<div class="heart" style="left:92%;animation-duration:9s;">❤️</div>
+
+
+<!-- =========================
+     PAGE 1
+========================= -->
+
+<div class="card" id="page1">
+
+    <div class="bigHeart">❤️</div>
+
+    <h1>
+        Let's see if you remember...
+    </h1>
+
+    <p>
+        When did we first talk? 🥺
+    </p>
+
+    <div class="options">
+
+        <button onclick="firstQuestion(false)">
+            25th September 2024
+        </button>
+
+        <button onclick="firstQuestion(true)">
+            20th September 2024
+        </button>
+
+        <button onclick="firstQuestion(false)">
+            23rd September 2024
+        </button>
+
+        <button onclick="firstQuestion(false)">
+            21st August 2024
+        </button>
+
+    </div>
+
+    <div class="message" id="wrong1"></div>
+
+</div>
+
+
+
+<!-- =========================
+     PAGE 2
+========================= -->
+
+<div class="card hidden" id="page2">
+
+    <div class="bigHeart">💗</div>
+
+    <h1>
+        Do you love me?
+    </h1>
+
+    <p>
+        Be honest... 👀❤️
+    </p>
+
+    <div class="options">
+
+        <button onclick="pageThree()">
+            YES ❤️
+        </button>
+
+        <button id="noLove">
+            NO 💀
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================
+     PAGE 3
+========================= -->
+
+<div class="card hidden" id="page3">
+
+    <div class="bigHeart">🥹❤️</div>
+
+    <h1>
+        Would you wanna grow old with me?
+    </h1>
+
+    <p>
+        Like... really old.
+        <br>
+        Annoying each other forever. 😂❤️
+    </p>
+
+    <div class="options">
+
+        <button onclick="pageFour()">
+            YES ❤️
+        </button>
+
+        <button id="noGrow">
+            NO 💀
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================
+     PAGE 4
+========================= -->
+
+<div class="card hidden" id="page4">
+
+    <div class="bigHeart">🌹</div>
+
+    <h1>
+        Our best day ❤️
+    </h1>
+
+    <p>
+        Which one do you think it was? 🥰
+    </p>
+
+    <div class="options">
+
+        <button onclick="pageFive()">
+            24th November 2025
+        </button>
+
+        <button onclick="pageFive()">
+            21st November 2025
+        </button>
+
+        <button onclick="pageFive()">
+            1st November 2025
+        </button>
+
+        <button onclick="pageFive()">
+            4th September 2025
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================
+     PAGE 5
+========================= -->
+
+<div class="card hidden" id="page5">
+
+    <div class="bigHeart">❤️</div>
+
+    <h1>
+        Please forgive your stupid af husband 🥺
+    </h1>
+
+    <div class="finalText">
+
+        Please forgive your stupid af husband
+        and don't stop loving him ever. ❤️
+
+        <br><br>
+
+        He loves you a lot more than he can
+        ever put into words.
+
+        <br><br>
+
+        And no matter how stupid he gets,
+        his heart will always choose you. ❤️
+
+    </div>
+
+
+    <div class="options">
+
+        <button onclick="showPhoto()">
+            Always ❤️
+        </button>
+
+        <button onclick="showPhoto()">
+            I'm growing old with you either way 🥹❤️
+        </button>
+
+    </div>
+
+    <div class="signature">
+        — Your stupid husband ❤️
+    </div>
+
+</div>
+
+
+
+<!-- =========================
+     PHOTO PAGE
+========================= -->
+
+<div class="photoPage" id="photoPage">
+
+    <!--
+        PUT YOUR PHOTO IN THE SAME FOLDER
+        AS index.html AND NAME IT:
+
+        us.jpg
+    -->
+
+    <img src="us.jpg" alt="Us ❤️">
+
+    <div class="photoCaption">
+        You & Me. Always. ❤️
+    </div>
+
+</div>
+
+
+
+<script>
+
+
+/* =========================
+   PAGE SWITCHER
+========================= */
+
+function switchPage(from, to) {
+
+    document
+        .getElementById(from)
+        .classList.add("hidden");
+
+    const next =
+        document.getElementById(to);
+
+    next.classList.remove("hidden");
+
+}
+
+
+/* =========================
+   PAGE 1
+========================= */
+
+function firstQuestion(correct) {
+
+    const message =
+        document.getElementById("wrong1");
+
+    if (correct) {
+
+        message.innerHTML =
+            "You remembered ❤️";
+
+        setTimeout(() => {
+
+            switchPage("page1", "page2");
+
+        }, 1000);
+
+    } else {
+
+        message.innerHTML =
+            "YOU FORGOT IT HOWW?? 😭💔";
+
+    }
+
+}
+
+
+/* =========================
+   PAGE 2
+========================= */
+
+function pageThree() {
+
+    switchPage("page2", "page3");
+
+}
+
+
+/* =========================
+   PAGE 3
+========================= */
+
+function pageFour() {
+
+    switchPage("page3", "page4");
+
+}
+
+
+/* =========================
+   PAGE 4
+========================= */
+
+function pageFive() {
+
+    switchPage("page4", "page5");
+
+}
+
+
+/* =========================
+   RUNAWAY BUTTON FUNCTION
+========================= */
+
+function runAway(button) {
+
+    const width =
+        button.offsetWidth;
+
+    const height =
+        button.offsetHeight;
+
+    const maxX =
+        window.innerWidth - width - 20;
+
+    const maxY =
+        window.innerHeight - height - 20;
+
+    const x =
+        Math.random() * maxX;
+
+    const y =
+        Math.random() * maxY;
+
+    button.style.position = "fixed";
+
+    button.style.left = x + "px";
+
+    button.style.top = y + "px";
+
+}
+
+
+/* =========================
+   NO LOVE BUTTON
+========================= */
+
+const noLove =
+    document.getElementById("noLove");
+
+noLove.addEventListener(
+    "mouseenter",
+    () => runAway(noLove)
+);
+
+noLove.addEventListener(
+    "touchstart",
+    (e) => {
+
+        e.preventDefault();
+
+        runAway(noLove);
+
+    }
+);
+
+noLove.addEventListener(
+    "click",
+    (e) => {
+
+        e.preventDefault();
+
+        runAway(noLove);
+
+    }
+);
+
+
+/* =========================
+   NO GROW BUTTON
+========================= */
+
+const noGrow =
+    document.getElementById("noGrow");
+
+noGrow.addEventListener(
+    "mouseenter",
+    () => runAway(noGrow)
+);
+
+noGrow.addEventListener(
+    "touchstart",
+    (e) => {
+
+        e.preventDefault();
+
+        runAway(noGrow);
+
+    }
+);
+
+noGrow.addEventListener(
+    "click",
+    (e) => {
+
+        e.preventDefault();
+
+        runAway(noGrow);
+
+    }
+);
+
+
+/* =========================
+   FINAL PHOTO TRANSITION
+========================= */
+
+function showPhoto() {
+
+    const photoPage =
+        document.getElementById("photoPage");
+
+    photoPage.classList.add("show");
+
+}
+
+</script>
+
+</body>
+</html>
